@@ -22,14 +22,14 @@ namespace Janken
             {
                 //じゃんけんゲーム開始
                 hand();
+
+                Console.WriteLine("もう一度挑戦しますか？＞");
+
+                Console.WriteLine("続行 : Y");
+                Console.WriteLine("終了 : N");
+
+                Console.ReadLine();
             }
-          
-            Console.WriteLine("もう一度挑戦しますか？＞");
-
-            Console.WriteLine("続行 : Y");
-            Console.WriteLine("終了 : N");
-
-            Console.ReadLine();
 
         }
 
