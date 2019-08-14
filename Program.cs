@@ -10,7 +10,6 @@ namespace Janken
     {
         static void Main(string[] args)
         {
-            //
             Console.WriteLine("じゃんけんゲーム");
             Console.WriteLine("じゃんけんを始めますか？＞");
 
@@ -23,12 +22,15 @@ namespace Janken
             {
                 //じゃんけんゲーム開始
                 hand();
-                Console.WriteLine("もう一度挑戦しますか？＞");
             }
-            else
-            {
-                Console.WriteLine("じゃんけんを終了します");
-            }
+          
+            Console.WriteLine("もう一度挑戦しますか？＞");
+
+            Console.WriteLine("続行 : Y");
+            Console.WriteLine("終了 : N");
+
+            Console.ReadLine();
+
         }
 
         //ユーザーの出す手を決めるメソッド

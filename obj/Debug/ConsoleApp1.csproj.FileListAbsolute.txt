@@ -5,3 +5,10 @@ C:\Users\nozomi.sasaki\source\repos\ConsoleApp1\obj\Debug\ConsoleApp1.csprojAsse
 C:\Users\nozomi.sasaki\source\repos\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CoreCompileInputs.cache
 C:\Users\nozomi.sasaki\source\repos\ConsoleApp1\obj\Debug\ConsoleApp1.exe
 C:\Users\nozomi.sasaki\source\repos\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
+C:\Users\nozomi.sasaki\Source\Repos\janken\bin\Debug\ConsoleApp1.exe.config
+C:\Users\nozomi.sasaki\Source\Repos\janken\bin\Debug\ConsoleApp1.exe
+C:\Users\nozomi.sasaki\Source\Repos\janken\bin\Debug\ConsoleApp1.pdb
+C:\Users\nozomi.sasaki\Source\Repos\janken\obj\Debug\ConsoleApp1.csprojAssemblyReference.cache
+C:\Users\nozomi.sasaki\Source\Repos\janken\obj\Debug\ConsoleApp1.csproj.CoreCompileInputs.cache
+C:\Users\nozomi.sasaki\Source\Repos\janken\obj\Debug\ConsoleApp1.exe
+C:\Users\nozomi.sasaki\Source\Repos\janken\obj\Debug\ConsoleApp1.pdb
