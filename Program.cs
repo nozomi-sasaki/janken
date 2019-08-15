@@ -8,10 +8,6 @@ namespace Janken
 {
     class Program
     {
-        public int user;
-        public int con;
-        public int sum;
-
         static void Main(string[] args)
         {
             Console.WriteLine("じゃんけんゲーム");
@@ -31,26 +27,42 @@ namespace Janken
 
                 //ユーザーの人数を決定する
                 Console.WriteLine("参加するプレイヤーの人数を入力してください＞");
-                Program usernum;
-                usernum = new Program();
-                usernum.user = int.Parse(Console.ReadLine());
+                int usernum = int.Parse(Console.ReadLine());
 
                 //コンピューターの人数を決定する
                 Console.WriteLine("コンピューターの人数を決めてください＞");
-                Program connum;
-                connum = new Program();
-                connum.con = int.Parse(Console.ReadLine());
+                int connum = int.Parse(Console.ReadLine());
 
                 //合計の人数を計算する
-                Program sumnum;
-                sumnum = new Program();
-                sumnum.sum = usernum.user + connum.con;
+                int sumnum = usernum + connum;
 
-                Console.WriteLine("ユーザー{0}人、コンピューター{1}人、合計{2}人でプレイします。\n", usernum.user, connum.con, sumnum.sum);
+                Console.WriteLine("ユーザー{0}人、コンピューター{1}人、合計{2}人でプレイします。\n", usernum, connum, sumnum);
 
-                //出す手を決定するメソッドを呼び出す
-                int[] hand1 = Hand();
-            
+                //出す手を決定する
+                int[] hand = new int[sumnum];
+
+                Random rnd = new Random();
+
+                for (int i = 0; i < sumnum; i++)
+                {
+                    if (i < usernum)
+                    {
+                        Console.WriteLine("{0}人目の出す手の番号を入力してください＞", i + 1);
+                        Console.WriteLine("0 : グー");
+                        Console.WriteLine("1 : チョキ");
+                        Console.WriteLine("2 : パー");
+
+                        hand[i] = int.Parse(Console.ReadLine());
+                        Console.WriteLine(hand[i]);
+                    }
+                    else
+                    {
+                        hand[i] = rnd.Next(3);
+                        //確認用
+                        //    Console.WriteLine("{0}人目(コンピューター)の手は{1}です", i + 1, hand[i]);
+                    }
+                }
+
 
                 //////結果判定
 
@@ -62,7 +74,7 @@ namespace Janken
                 //グーチョキパーのうち何種類の手があるか
                 for (int i = 0; i < 3; i++)
                     {
-                        if (((IList<int>)hand1).Contains(i))
+                        if (((IList<int>)hand).Contains(i))
                         {
                             count[i] = 1;
                         }
@@ -106,40 +118,6 @@ namespace Janken
                 Console.ReadLine();
             }
 
-        }
-
-
-        //出す手を決定するメソッド
-        static public int[] Hand()
-        {
-            Program sumnum;
-            sumnum = new Program();
-            Program usernum;
-            usernum = new Program();
-            int[] hand = new int[sumnum.sum];
-
-            Random rnd = new Random();
-
-            for (int i = 0; i < sumnum.sum; i++)
-            {
-                if (i < usernum.user)
-                {
-                    Console.WriteLine("{0}人目の出す手の番号を入力してください＞", i + 1);
-                    Console.WriteLine("0 : グー");
-                    Console.WriteLine("1 : チョキ");
-                    Console.WriteLine("2 : パー");
-
-                    hand[i] = int.Parse(Console.ReadLine());
-                    Console.WriteLine(hand[i]);
-                }
-                else
-                {
-                    hand[i] = rnd.Next(3);
-                    //確認用
-                    //    Console.WriteLine("{0}人目(コンピューター)の手は{1}です", i + 1, hand[i]);
-                }
-            }
-            return hand;
         }
     }
 }
