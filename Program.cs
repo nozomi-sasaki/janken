@@ -8,6 +8,10 @@ namespace Janken
 {
     class Program
     {
+        public int user;
+        public int con;
+        public int sum;
+
         static void Main(string[] args)
         {
             Console.WriteLine("じゃんけんゲーム");
@@ -21,7 +25,78 @@ namespace Janken
             if (start == "Y" || start == "y")
             {
                 //じゃんけんゲーム開始
-                hand();
+
+
+                //////ユーザー・コンピューターの人数を設定する
+
+                //ユーザーの人数を決定する
+                Console.WriteLine("参加するプレイヤーの人数を入力してください＞");
+                Program usernum;
+                usernum = new Program();
+                usernum.user = int.Parse(Console.ReadLine());
+
+                //コンピューターの人数を決定する
+                Console.WriteLine("コンピューターの人数を決めてください＞");
+                Program connum;
+                connum = new Program();
+                connum.con = int.Parse(Console.ReadLine());
+
+                //合計の人数を計算する
+                Program sumnum;
+                sumnum = new Program();
+                sumnum.sum = usernum.user + connum.con;
+
+                Console.WriteLine("ユーザー{0}人、コンピューター{1}人、合計{2}人でプレイします。\n", usernum.user, connum.con, sumnum.sum);
+
+                //出す手を決定するメソッドを呼び出す
+                int[] hand1 = Hand();
+            
+
+                //////結果判定
+
+
+
+                //count[]の初期化
+                int[] count = new int[] { 0, 0, 0 };
+
+                //グーチョキパーのうち何種類の手があるか
+                for (int i = 0; i < 3; i++)
+                    {
+                        if (((IList<int>)hand1).Contains(i))
+                        {
+                            count[i] = 1;
+                        }
+                    }
+
+                int countsum = count.Sum();
+
+                    Console.WriteLine("countsum:{0}",countsum);
+
+
+                //結果を表示させる
+                if (countsum == 1 || countsum == 3)
+                    {
+                        Console.WriteLine("あいこです");
+
+                    //出す手を決定するメソッドを呼び出す
+                }
+
+                else
+                    {
+
+                    if (count[0] == 0)
+                        {
+                            Console.WriteLine("チョキの人の勝ちです");
+                        }
+                    else if (count[1] == 0)
+                        {
+                            Console.WriteLine("パーの人の勝ちです");
+                        }
+                    else
+                        {
+                            Console.WriteLine("グーの人の勝ちです");
+                        }
+                    }
 
                 Console.WriteLine("もう一度挑戦しますか？＞");
 
@@ -33,49 +108,38 @@ namespace Janken
 
         }
 
-        //ユーザーの出す手を決めるメソッド
-        static void hand()
+
+        //出す手を決定するメソッド
+        static public int[] Hand()
         {
-            Console.WriteLine("出す手の番号を入力してください＞");
-            Console.WriteLine("0 : グー");
-            Console.WriteLine("1 : チョキ");
-            Console.WriteLine("2 : パー");
+            Program sumnum;
+            sumnum = new Program();
+            Program usernum;
+            usernum = new Program();
+            int[] hand = new int[sumnum.sum];
 
-            string userhand = Console.ReadLine();
-            Console.WriteLine(userhand);
+            Random rnd = new Random();
 
-            game(userhand);
-        }
-
-        //じゃんけんの勝敗を決めるメソッド
-        static void game(string user)
-        {
-            Random rnd = new System.Random();
-            string con = rnd.Next(3).ToString();
-
-            Console.WriteLine(con);
-
-            //コンピュータが勝利した場合
-            if (((user == "0") && (con == "2")) ||　((user == "1") && (con == "0")) ||　((user == "2") && (con == "1")))
+            for (int i = 0; i < sumnum.sum; i++)
             {
-                Console.WriteLine("コンピュータの勝ちです\n");
-            }
-            //自分が勝利した場合
-            else if (((user == "0") && (con == "1")) || ((user == "1") && (con == "2")) || ((user == "2") && (con == "0")))
-            {
-                Console.WriteLine("あなたの勝ちです\n");
-            }
-            //あいこだった場合
-            else
-            {
-                Console.WriteLine("あいこです");
-                Console.WriteLine("もう一度じゃんけんを始めます\n");
+                if (i < usernum.user)
+                {
+                    Console.WriteLine("{0}人目の出す手の番号を入力してください＞", i + 1);
+                    Console.WriteLine("0 : グー");
+                    Console.WriteLine("1 : チョキ");
+                    Console.WriteLine("2 : パー");
 
-                //もう一度ユーザーの出す手を決めるメソッドを呼び出す
-                hand();
+                    hand[i] = int.Parse(Console.ReadLine());
+                    Console.WriteLine(hand[i]);
+                }
+                else
+                {
+                    hand[i] = rnd.Next(3);
+                    //確認用
+                    //    Console.WriteLine("{0}人目(コンピューター)の手は{1}です", i + 1, hand[i]);
+                }
             }
-
+            return hand;
         }
     }
 }
-
