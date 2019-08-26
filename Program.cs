@@ -28,11 +28,11 @@ namespace Janken
 
                     //ユーザーの人数を決定する
                     Console.WriteLine("何人で遊びますか＞");
-                    int usernum = int.Parse(Console.ReadLine());
+                    int usernum = InPut();
 
                     //コンピューターの人数を決定する
                     Console.WriteLine("コンピューターの人数を決めてください＞");
-                   int connum = int.Parse(Console.ReadLine());
+                    int connum = InPut();
 
                     //合計の人数を計算する
                     int sumnum = usernum + connum;
@@ -41,7 +41,7 @@ namespace Janken
 
 
                     Console.WriteLine("何回勝負にしますか(あいこを除く)＞");
-                    int time = int.Parse(Console.ReadLine());
+                    int time = InPut();
 
                     Console.WriteLine("\n");
 
@@ -69,7 +69,7 @@ namespace Janken
                                     Console.WriteLine("1 : チョキ");
                                     Console.WriteLine("2 : パー");
 
-                                    hand.Add(int.Parse(Console.ReadLine()));
+                                    hand.Add(InPuthand());
                                     Console.WriteLine("\n");
 
                                     ////確認用
@@ -224,7 +224,7 @@ namespace Janken
                     {
                         shouritsu[i] = person.Count(value => value == i);
 
-                        Console.WriteLine("プレイヤー{0}の勝ち数は{1}", i, shouritsu[i]);
+                        Console.WriteLine("プレイヤー{0}の勝ち数は{1}、勝率は[2]", i, shouritsu[i], shouritsu[i] / time);
                     }
 
                     Console.WriteLine("\n");
@@ -243,7 +243,88 @@ namespace Janken
             }
 
             Console.WriteLine("また遊んでね");
-            Console.ReadLine();
+            Console.ReadKey();
         }
+
+        private static int InPut()
+        {
+            while (true)
+            {
+                string input = Console.ReadLine();
+                int number;
+
+                if(int.TryParse(input, out number))
+                {
+                    if (int.Parse(input) < 0)
+                    {
+                        Console.WriteLine("0以上の整数を入力してね");
+                        continue;
+                    }
+
+                    else if (int.Parse(input) < -2147483648 || int.Parse(input) > 2147483647)
+                    {
+                        Console.WriteLine("ちょっと多すぎます");
+                        continue;
+                    }
+
+                    else if (input == null)
+                    {
+                        Console.WriteLine("入力してからenter押してね");
+                        continue;
+                    }
+
+                    else
+                    {
+                        return number;
+                    }
+                }
+
+                else
+                {
+                    Console.WriteLine("数字を入力してね");
+                    continue;
+                }
+
+            }
+
+        }
+
+        private static int InPuthand()
+        {
+            while (true)
+            {
+                string input = Console.ReadLine();
+                int number;
+
+                if (int.TryParse(input, out number))
+                {
+                    if (int.Parse(input) < 0 || int.Parse(input) > 2)
+                    {
+                        Console.WriteLine("0～2の整数を入力してね");
+                        continue;
+                    }
+
+                    else if (input == null)
+                    {
+                        Console.WriteLine("入力してからenter押してね");
+                        continue;
+                    }
+
+                    else
+                    {
+                        return number;
+                    }
+                }
+
+                else
+                {
+                    Console.WriteLine("数字を入力してね");
+                    continue;
+                }
+
+            }
+
+        }
+
     }
 }
