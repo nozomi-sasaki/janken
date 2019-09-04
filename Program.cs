@@ -1,24 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ConsoleApp1
 {
     class Program
     {
+
         static void Main(string[] args)
         {
-            int usernum, sumnum;
+            string start;
 
             //じゃんけんゲームの参加人数を決める
-            Player Play = new Player();
-            Input In = new Input();
-            Play.Sethand(In, out usernum, out sumnum);
-
-            //じゃんけんゲームのプレイ回数を決める
-            Console.WriteLine("何回勝負にしますか(あいこを除く)＞");
-            int time = In.InPutnumber();
-            Console.WriteLine("\n");
+            Input input = new Input();
 
             //ゲーム開始
             while (true)
@@ -26,52 +19,54 @@ namespace ConsoleApp1
                 Console.WriteLine("じゃんけんゲーム");
                 Console.WriteLine("じゃんけんを始めます！");
 
-                //1週目のみ初期値"Y"に設定しておく
-                string start = "Y";
+                Judge judge = new Judge();
 
-                if (start == "Y" || start == "y")
+                for (int t = 0; t < input.time; t++)
                 {
-                    Hand Ha = new Hand();
-                    List<int> hand = Ha.Personhand(usernum, sumnum, In);
+                    Console.WriteLine("{0}回戦目開始\n", t + 1);
 
-                    List<int> person = new List<int>();
+                    judge.gamecount = 0;
 
-                    for (int t = 0; t < time; t++)
+                    while (judge.gamecount == 0)
                     {
-                        Console.WriteLine("{0}回戦目開始\n", t + 1);
+                        //出す手の決定
+                        input.Handmaker();
 
                         //勝敗の判定
-                        Judge Ju = new Judge();
-                        Ju.Gamejudge(hand, person);
-
-                        Console.WriteLine("{0}回戦目終了\n", t + 1);
-
+                        judge.Gamejudge(input.personhand);
+                        input.personhand.Clear();
                     }
 
-                    //最終結果の出力
-                    Result Re = new Result();
-                    Re.Gameresult(sumnum, time, person);
+                    Console.WriteLine("{0}回戦目終了\n", t + 1);
 
                 }
 
-                else if (start == "N" || start == "n")
+                //最終結果の出力
+                Result result = new Result();
+                result.GameResult(input.sumnum, input.time, judge.winperson);
+
+                while (true)
                 {
+                    Console.WriteLine("もう一度遊びますか？＞");
+
+                    Console.WriteLine("もう一回 : Y");
+                    Console.WriteLine("終了 　　: N");
+
+                    start = Console.ReadLine();
+
+                    if (start != "N" && start != "n" && start != "Y" && start != "y")
+                    {
+                        Console.WriteLine("入力が間違ってるよ");
+                        continue;
+                    }
+
                     break;
                 }
-
-                else
-                {
-                    Console.WriteLine("入力が間違ってるよ");
-                    continue;
-                }
-
-                Console.WriteLine("もう一度遊びますか？＞");
-
-                Console.WriteLine("もう一回 : Y");
-                Console.WriteLine("終了 　　: N");
-
-                start.Replace("Y", Console.ReadLine());
-
+      
+                    if (start == "N" || start == "n")
+                    {
+                        break;
+                    }
             }
 
             Console.WriteLine("また遊んでね");
@@ -79,4 +74,5 @@ namespace ConsoleApp1
         }
 
     }
+
 }

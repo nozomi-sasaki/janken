@@ -8,16 +8,17 @@ namespace ConsoleApp1
 {
     class Result
     {
-        public void Gameresult(int sumnum, int time, List<int> person)
+        public void GameResult(int sumnum, int time, List<int> winperson)
         {
             //結果出力
-            int[] shouritsu = new int[sumnum];
+            int[] winnum = new int[sumnum];
 
             for (int i = 0; i < sumnum; i++)
             {
-                shouritsu[i] = person.Count(value => value == i);
+                winnum[i] = winperson.Count(value => value == i);
+                double shouritsu = 1.0 * winnum[i] / time;
 
-                Console.WriteLine("プレイヤー{0}の勝ち数は{1}、勝率は[2]", i, shouritsu[i], shouritsu[i] / time);
+                Console.WriteLine("プレイヤー{0}の勝ち数は{1}、勝率は{2:f2}", i, winnum[i], shouritsu);
             }
 
             Console.WriteLine("\n");

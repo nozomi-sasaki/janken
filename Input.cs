@@ -8,7 +8,33 @@ namespace ConsoleApp1
 {
     class Input
     {
-        public int InPutnumber()
+        public int usernum;
+        public int connum;
+        public int sumnum;
+        public int time;
+        public List<int> personhand = new List<int>();
+
+        public Input()
+        {
+            //ユーザーの人数を決定する
+            Console.WriteLine("何人で遊びますか＞");
+            usernum = CheckNumber();
+
+            //コンピューターの人数を決定する
+            Console.WriteLine("コンピューターの人数を決めてください＞");
+            connum = CheckNumber();
+
+            //合計の人数を計算する
+            sumnum = usernum + connum;
+            Console.WriteLine("ユーザー{0}人、コンピューター{1}人、合計{2}人でプレイします。\n", usernum, connum, sumnum);
+
+            //じゃんけんゲームのプレイ回数を決める
+            Console.WriteLine("何回勝負にしますか(あいこを除く)＞");
+            time = CheckNumber();
+            Console.WriteLine("\n");
+        }
+
+        public int CheckNumber()
         {
             while (true)
             {
@@ -51,7 +77,7 @@ namespace ConsoleApp1
 
         }
 
-        public int InPuthand()
+        public int CheckHand()
         {
             while (true)
             {
@@ -88,5 +114,37 @@ namespace ConsoleApp1
 
         }
 
+        public List<int> Handmaker()
+        {
+            ////出す手を決定する
+            Random rnd = new Random();
+
+            //i:0～(sumnum-1)(i+1番目のプレイヤー)
+            for (int i = 0; i < sumnum; i++)
+            {
+                if (i < usernum)
+                {
+                    Console.WriteLine("{0}人目の出す手の番号を入力してください＞", i + 1);
+                    Console.WriteLine("0 : グー");
+                    Console.WriteLine("1 : チョキ");
+                    Console.WriteLine("2 : パー");
+
+                    //人間の手を入力させる
+                    personhand.Add(CheckHand());
+                    Console.WriteLine("\n");
+
+                    ////確認用
+                    Console.WriteLine("{0}人目(ユーザー)の手は{1}です", i + 1, personhand[i]);
+                }
+                else
+                {
+                    personhand.Add(rnd.Next(3));
+                    ////確認用
+                    Console.WriteLine("{0}人目(コンピューター)の手は{1}です", i + 1, personhand[i]);
+                }
+
+            }
+            return personhand;
+        }
     }
 }
