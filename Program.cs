@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace ConsoleApp1
 {
-    class Program
+    public class Program
     {
 
-        static void Main(string[] args)
+        public static void Main()
         {
             string start;
 
